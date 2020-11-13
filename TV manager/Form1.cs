@@ -20,7 +20,9 @@ namespace TV_manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            WindowState = FormWindowState.Normal;//см. текст ниже.
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
         }
     }
 }
