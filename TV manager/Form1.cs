@@ -20,18 +20,22 @@ namespace TV_manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal; FormBorderStyle = FormBorderStyle.None; WindowState = FormWindowState.Maximized; // расширение окна
-
-            string put = Environment.CurrentDirectory;
-            FileStream file = new FileStream(@"" + put + "\\pictures", FileMode.Open); // открытие файла, от куда брать список пикч, создание файлового потока
-            StreamReader reader = new StreamReader(file); // создание потоковый читатель и связывание его с файловым потоком
-            int mas = 1;
+            try
+            {
+                WindowState = FormWindowState.Normal; FormBorderStyle = FormBorderStyle.None; WindowState = FormWindowState.Maximized; // расширение окна
+                string put = Environment.CurrentDirectory;
+                FileStream file = new FileStream(@"" + put + "\\pictures", FileMode.Open); // открытие файла, от куда брать список пикч, создание файлового потока
+                StreamReader reader = new StreamReader(file); // создание потоковый читатель и связывание его с файловым потоком   
+                int mas = 1;
             while (mas != 0)
             {
                 string count = reader.ReadLine();
                 if (count != null)
                 { list.Add(count); mass++; } else mas = 0;
             }
+            }
+            catch { MessageBox.Show("Ошибка 1", "Отсутствует файл pictures в корневом каталоге или этот файл пуст"); Thread.Sleep(30000); Application.Exit(); }
+
 
             /*---------------------------------------------------------------------*/
 
@@ -53,13 +57,18 @@ namespace TV_manager
 
         void Pict()
         {
-            int count = 0;
-            while (true)
+            try
             {
-                pictureBox1.Image = Image.FromFile(list[count]); count++;
-                if (mass == count) count = 0;
-                Thread.Sleep(15000);
+                int count = 0;
+                while (true)
+                {
+                    using (pictureBox1.Image) { }
+                    pictureBox1.Image = Image.FromFile(list[count]); count++;
+                    if (mass == count) count = 0;
+                    Thread.Sleep(15000);
+                }
             }
+            catch { MessageBox.Show("Ошибка 2", "Один из файлов для показа был удален или перемещен"); Thread.Sleep(30000); Application.Exit(); }
         }
     }
 }
