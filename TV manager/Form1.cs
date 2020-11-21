@@ -34,7 +34,7 @@ namespace TV_manager
                 { list.Add(count); mass++; } else mas = 0;
             }
             }
-            catch { MessageBox.Show("Ошибка 1", "Отсутствует файл pictures в корневом каталоге или этот файл пуст"); Thread.Sleep(30000); Application.Exit(); }
+            catch { MessageBox.Show("Отсутствует файл pictures в корневом каталоге или этот файл пуст", "Ошибка 1"); Thread.Sleep(30000); Application.Exit(); }
 
 
             /*---------------------------------------------------------------------*/
@@ -68,7 +68,7 @@ namespace TV_manager
                     Thread.Sleep(15000);
                 }
             }
-            catch { MessageBox.Show("Ошибка 2", "Один из файлов для показа был удален или перемещен"); Thread.Sleep(30000); Application.Exit(); }
+            catch { MessageBox.Show("Один из файлов для показа был удален или перемещен", "Ошибка 2"); Thread.Sleep(30000); Application.Exit(); }
         }
     }
 }
